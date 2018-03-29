@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Log;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -56,6 +56,26 @@ class User extends Authenticatable
         $user->role = $userData->role;
         $user->status = $userData->status;
         // $user->password = Hash::make($userData->password);
+        $user->save();
+        Log::debug("Exit Function ".__CLASS__." ".__FUNCTION__);
+        return $user;
+    }
+
+    public function createUserByAdmin($userData)
+    {
+        Log::debug("Enter Function ".__CLASS__." ".__FUNCTION__);
+        $user = new User();
+        if(isset($userData->email)){
+            $user->email = $userData->email;
+        }
+        $user->name = $userData->name;
+        if($userData->pincode){
+            $user->pincode   = $userData->pincode;
+        }
+        $user->mobile_no = $userData->mobile_no;
+        $user->role = $userData->role;
+        $user->status = $userData->status;
+        $user->password = $userData->password;
         $user->save();
         Log::debug("Exit Function ".__CLASS__." ".__FUNCTION__);
         return $user;

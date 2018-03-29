@@ -98,20 +98,17 @@
          	<div class="vali-form">
          	<div class="col-md-12 form-group2 group-mail" ng-if="!edittrue">
               <label class="control-label">Select</label>
-            <select ng-model="newuser.role" ng-change="roleselection()">
+            <select ng-model="newuser.role" >
             	<option value="">Select User Role</option>
-            	<option ng-repeat="role in roleslist" value="{$role.name$}">{$role.name$}</option>
+            	<option ng-repeat="role in roleslist" value="{$role.id$}">{$role.role_name$}</option>
             	
             </select>
             </div>
             <div class="col-md-6 form-group1">
               <label class="control-label">Firstname</label>
-              <input type="text" ng-model="newuser.first_name" placeholder="Firstname" >
+              <input type="text" ng-model="newuser.name" placeholder="Name" >
             </div>
-            <div class="col-md-6 form-group1 form-last">
-              <label class="control-label">Lastname</label>
-              <input type="text" ng-model="newuser.last_name" placeholder="Lastname" >
-            </div>
+            
             <div class="clearfix"> </div>
             </div>
             
@@ -126,20 +123,17 @@
              <div class="clearfix"> </div>
              <div class="col-md-6 form-group1 group-mail">
               <label class="control-label">Phone Number</label>
-              <input type="number" placeholder="Phone Number"  ng-model="newuser.phoneno" >
+              <input type="number" placeholder="Phone Number"  ng-model="newuser.mobile_no" >
             </div>
-            <!-- <div class="col-md-6 form-group1 group-mail" ng-if="newuser.role == 'Store Owner'">
-              <label class="control-label">Branch Name</label>
-            	<input type="text" placeholder="Branch Name"  ng-model="newuser.branch_name">
-            </div> -->
-            <div class="col-md-6 form-group2 group-mail" ng-if="newuser.role == 'Delivery Boy'||newuser.role == 'Store Owner'">
-              <label class="control-label">Branch Name</label>
-              <select ng-model="newuser.branch_id">
-                <option value="">Select Branch Name</option>
-                <option ng-repeat="branch in branches" value="{$branch.id$}">{$branch.branch_name$} - {$branch.city.city_name$}</option>
-                
-              </select>
+            <div class="col-md-6 form-group1 group-mail">
+              <label class="control-label">Pincode</label>
+              <input type="number" placeholder="Pincode"  ng-model="newuser.pincode" >
             </div>
+             <div class="col-md-6 form-group1 group-mail" ng-if="newuser.role == 3">
+              <label class="control-label">Pub Name</label>
+            	<input type="text" placeholder="Pub Name"  ng-model="newuser.pub_name">
+            </div>
+            
             <div class="col-md-6 form-group2 group-mail" ng-if="edittrue">
               <label class="control-label">Status</label>
             	<!-- <select ng-model="newuser.role">

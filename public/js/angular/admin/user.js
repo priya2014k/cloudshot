@@ -12,7 +12,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
     $scope.setPagingData = function(page){
         /*var pagedData = data.slice((page - 1) * pageSize, page * pageSize);*/
         $scope.myData = page.data;
-        conole.log($scope.myData);
+        console.log($scope.myData);
         $scope.totalServerItems = page.total;
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -98,7 +98,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                           });
                           return;
                         }                       
-                       $scope.editCoachee($scope.selectedRows[0].id);                       
+                       $scope.edituser($scope.selectedRows[0]);                       
                 },
               order:212,
           },
@@ -187,7 +187,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
         fastWatch: true,
         columnDefs: [//{ field: "entity_name",enableFiltering: true,displayName:"Name",cellToolTip:'Some Text',width:200,visible:true,cellToolTip:true},
                     //{ field: "name",enableFiltering: true,displayName:"Name",width:200,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()">{$ row.entity.first_name+" "+row.entity.last_name$}</div>'},
-                    { field: "name",enableFiltering: true,displayName:"First Name",width:200,},
+                    { field: "name",enableFiltering: true,displayName:"Name",width:200,},
                     { field: "email",enableFiltering: true,displayName:"Email",width:200,},
                     { field: "mobile_no",enableFiltering: true,displayName:"Phone",width:200},
                     { field: "mail_id",enableFiltering: true,displayName:"Email",width:300,cellToolTip:true,visible:false},
@@ -223,10 +223,9 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
           url: 'api/getroles',
          }).then(function(data){
             console.log(data);
-            if(data.status == 'Success')
-            {
-
-            }
+            
+            $scope.roleslist = data.data.data;
+           console.log($scope.roleslist);
         },function (error){
 
       });
@@ -255,10 +254,26 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
 	    $scope.edittrue = false;
 	}
 
+	$scope.edituser = function(userdata)
+    {
+    	$scope.newusershow = true;
+    	$scope.edittrue = true;
+    	$scope.newuser={};
+    	console.log(userdata);
+    	$scope.newuser.id = userdata.id;
+	    $scope.newuser.email = userdata.email;
+	    $scope.newuser.phoneno = parseInt(userdata.phone_no);
+	    $scope.newuser.role = userdata.rolename;
+	    $scope.newuser.status = userdata.status;
+	    $scope.newuser.name = userdata.name;
+	    $scope.newuser.last_name = userdata.last_name;
+	    $scope.newuser.branch_name = userdata.branch_name;
+    }
+
 	$scope.adduser = function()
   	{
 
-	    if($scope.newuser.role == undefined || $scope.newuser.role == null || $scope.newuser.role  == '')
+	    /*if($scope.newuser.role == undefined || $scope.newuser.role == null || $scope.newuser.role  == '')
 	    {
 	        $scope.notifymessage("Select Role",'failure');
 	        return;
@@ -307,29 +322,54 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
 	           $scope.notifymessage("Mobile Number Should Be 10 Digits",'failure');
 	            return;
 	        }
-	    }
+	    }*/
 	   
-
+	    console.log($scope.newuser);
 	      $http({ 
 	          method: 'POST', 
 	          url: 'api/adduser',
 	          data:$scope.newuser,
-	          }).success(function(data, status, headers, config){
+	          }).then(function(data){
 	            console.log(data);
 	            $("#loadercontainer").hide();
 	            if(data.status == 'Success')
 	            {
 
 	                  $scope.newuser = {};
-	                  $scope.notifymessage(data.reason,'success')
+	                  $scope.notifymessage(data.message,'success')
 	                  $scope.getallusers();
 	            }
 	            else
 	            {
-	                 $scope.notifymessage(data.reason,'failure')
+	                 $scope.notifymessage(data.message,'failure')
 	            } 
 	    
-	    });
+	    },function (error){
+
+      });
 	 }
+
+	 $scope.notifymessage = function(message,type)
+{
+   notify.closeAll();
+    if(type == 'success')
+    {
+        notify({
+                  message: message,
+                  classes:'alert-success',
+                  duration: 5000,
+                 
+                });
+    }
+    else if(type == 'failure')
+    {
+       notify({
+                  message: message,
+                  classes:'alert-danger',
+                  duration: 5000,
+                  startTop:200
+                });
+    }
+}
 
 }]);

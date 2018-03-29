@@ -11,5 +11,5 @@ use URL;
 class Role extends Model
 {
     protected $primaryKey = 'id';
-
+    protected $table = 'role';   
 }

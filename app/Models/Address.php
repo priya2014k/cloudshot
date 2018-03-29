@@ -12,6 +12,8 @@ class Address extends Model
 {
     protected $primaryKey = 'id';
 
+    
+
     /*create user address*/
     public function createAddress($userData,$saveduserData)
     {
