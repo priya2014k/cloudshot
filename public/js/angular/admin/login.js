@@ -1,11 +1,5 @@
 'use strict';
 
-var app = angular.module('app',['cgNotify',]);
-
-app.config(['$interpolateProvider',function($interpolateProvider){
-    $interpolateProvider.startSymbol('{$').endSymbol('$}');
-    
-}]);
 app.controller('loginController', ['$scope','$http','notify',
   	function($scope,$http,notify) {
 

@@ -40,8 +40,8 @@
     <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.min.js') }}" /></script>
     <script src="{{ asset('js/ui-load.js') }}"></script>
     <script src="{{ asset('js/ui-jq.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/admin/login.js') }}"></script>
+    <script src="{{ asset('js/angular/app.js') }}"></script>
+    <script src="{{ asset('js/angular/admin/login.js') }}"></script>
      @yield('content')
    
     
