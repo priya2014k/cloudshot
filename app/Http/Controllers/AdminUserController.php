@@ -38,7 +38,9 @@ class AdminUserController extends Controller
 
     public function getallusers(){
     	$response = (Object)[];
-    	$result = Merchant::get();
+    	$merchant = Merchant::get()->toArray();
+        $user = User::get()->toArray();
+        $result = array_merge($merchant,$user);
     	$response->status = "success";
     	$response->data = $result;
         return response()->json($response);
@@ -48,34 +50,79 @@ class AdminUserController extends Controller
         $user = $request->all();
         Log::debug("Enter Function ".__CLASS__." ".__FUNCTION__);
         $response = (Object)[];
-       // $signupValidator = $this->user->signupValidator($request->all());
-        /*if ($signupValidator->fails()) {
-            $messages = $signupValidator->errors();
-            $response->status = "failed";
-            $response->message = $messages;
-            return response()->json($response);
-        }*/
         if($user['role'] == 3){
-            $olduser =  Merchant::where('email', $user['email'])->first();
+            $signupValidator = $this->merchant->adminsignupValidator($request->all());
+            if ($signupValidator->fails()) {
+                $messages = $signupValidator->errors();
+                $response->status = "failed";
+                $response->message = $messages;
+                return response()->json($response);
+            }
         }else{
-            $olduser =  User::where('email', $user['email'])->first();
+            $signupValidator = $this->user->adminsignupValidator($request->all());
+            if ($signupValidator->fails()) {
+                $messages = $signupValidator->errors();
+                $response->status = "failed";
+                $response->message = $messages;
+                return response()->json($response);
+            }
         }
-        
-        if(!$olduser){
-            $request->status = 1;
+        if(array_key_exists('id', $user)){
             if($user['role'] == 3){
                 $merchant = $this->merchant->createMerchant($request);
             }else{
                 $user = $this->user->createUserByAdmin($request);
             }
             $response->status = "success";
-            $response->message = "User created successfully!";
+            $response->message = "User Updated successfully!";
+        }else{
+            if($user['role'] == 3){
+            $olduser =  Merchant::where('email', $user['email'])->first();
+            }else{
+                $olduser =  User::where('email', $user['email'])->first();
+            }
+            
+            if(!$olduser){
+                $request->status = 1;
+                if($user['role'] == 3){
+                    $merchant = $this->merchant->createMerchant($request);
+                }else{
+                    $user = $this->user->createUserByAdmin($request);
+                }
+                $response->status = "success";
+                $response->message = "User created successfully!";
+            }
+            else{
+                $response->status = "failed";
+                $response->message = "Email already exist sign in!";
+            }
+           
+            
+            Log::debug("Exit Function ".__CLASS__." ".__FUNCTION__);   
+            return response()->json($response);
         }
-        else{
-            $response->status = "failed";
-            $response->message = "Email already exist sign in!";
-        }
-        Log::debug("Exit Function ".__CLASS__." ".__FUNCTION__);   
-        return response()->json($response);
+    }
+    
+    public function changeuserstatus(Request $request){
+        $users = $request->get('user');
+        $status = $request->get('status');
+        if($status == 'activate')
+            $status = 1;
+        else if($status == 'terminate')   
+            $status = 3; 
+         foreach ($users as $user) 
+         {      
+            if($user['role'] == 3){
+                $MR = Merchant::find($user['id']);
+                $MR->status = $status;
+                $MR->save();
+            }else{
+                $UR = User::find($user['id']);
+                $UR->status = $status;
+                $UR->save();
+            }
+        
+         }      
+        return response()->json(['status' => 'success','reason' => 'Coachee Status Changed','response' =>200]);
     }
 }

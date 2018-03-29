@@ -13,18 +13,35 @@ class Merchant extends Model
     protected $primaryKey = 'id';
     protected $table = 'merchant'; 
     
-
-    //*create user*/
+    public function adminsignupValidator($signupData)
+    {
+        return Validator::make($signupData, [
+            'name' => 'required',
+            'email' => 'required',
+            'pub_name' => 'pub_name',
+            'role' => 'role',
+            'pincode' => 'pincode',       
+            'mobile_no' => 'required',
+            'password'  =>'password',
+            ]);
+    }
+    //*create merchant*/
     public function createMerchant($userData)
     {
         Log::debug("Enter Function ".__CLASS__." ".__FUNCTION__);
-        $user = new Merchant();
+        if($userData->id){
+            $user =  Merchant::where('email', $userData['email'])->first();
+        }else{
+            $user = new Merchant();
+        }
+        
+        
         if(isset($userData->email)){
             $user->email = $userData->email;
         }
         $user->name = $userData->name;
         $user->pub_name = $userData->pub_name;
-        $user->pincode   = $userData->pincode   ;
+        $user->pincode   = $userData->pincode;
         $user->mobile_no = $userData->mobile_no;
         $user->role = $userData->role;
         $user->status = $userData->status;

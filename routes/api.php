@@ -28,7 +28,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('getroles', 'AdminUserController@getroles');
     Route::get('getallusers', 'AdminUserController@getallusers');
     Route::post('adduser', 'AdminUserController@adduser');
-    
+    Route::post('changeuserstatus', 'AdminUserController@changeuserstatus');
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('user', 'UserController@getAuthUser');
     });

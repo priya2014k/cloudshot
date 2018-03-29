@@ -50,7 +50,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                         });
                       },
         gridMenuCustomItems: [
-          {
+          /*{
             title: 'View',
             action: function(){                       
                        $scope.selectedRows = $scope.gridApi.selection.getSelectedRows();
@@ -75,7 +75,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                        $scope.viewCoachee($scope.selectedRows[0].id);                       
                 },
               order:211,
-          },
+          },*/
           {
             title: 'Edit',
             action: function(){                       
@@ -115,7 +115,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                           });
                           return;
                         }
-                      $scope.changeCoacheeStatus($scope.selectedRows,'activate')
+                      $scope.changeuserstatus($scope.selectedRows,'activate')
                 },
             order:213,
           },
@@ -133,55 +133,11 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                           });
                           return;
                         }
-                       $scope.changeCoacheeStatus($scope.selectedRows,'terminate');                     
+                       $scope.changeuserstatus($scope.selectedRows,'terminate');                     
                 },
               order:214,
-          },
-          {
-            title: 'Remove',
-            action: function($event){
-                    $scope.selectedRows = $scope.gridApi.selection.getSelectedRows();
-                    if($scope.selectedRows.length == 0)
-                    {
-                      notify({
-                        message: 'Please Select Any Row',
-                        classes: 'alert-danger',
-                        duration: 2000
-                      });
-                      return;
-                    }
-                    swal({
-                          title: "Are you sure?",
-                          text: "You will not be able to recover this coachee!",
-                          type: "warning",
-                          showCancelButton: true,
-                          confirmButtonColor: "#DD6B55",
-                          confirmButtonText: "Yes, delete it!",
-                          closeOnConfirm: false
-                        },
-                        function(){                          
-                          $scope.changeCoacheeStatus($scope.selectedRows,'remove');
-                        });
-                },
-            order:215,
-          },
-          {
-            title: 'Export Excel',
-            action: function($event){
-                    $scope.selectedRows = $scope.gridApi.selection.getSelectedRows();
-                    if($scope.selectedRows.length == 0)
-                        {
-                          notify({
-                            message: 'Please Select Atleast One Row',
-                            classes: 'alert-danger',
-                            duration: 2000
-                          });
-                          return;
-                        }
-                    $scope.exportExcel($scope.selectedRows);
-                },
-            order:216,
           }
+          
         ],
         primaryKey:'uid',
         fastWatch: true,
@@ -190,10 +146,9 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
                     { field: "name",enableFiltering: true,displayName:"Name",width:200,},
                     { field: "email",enableFiltering: true,displayName:"Email",width:200,},
                     { field: "mobile_no",enableFiltering: true,displayName:"Phone",width:200},
-                    { field: "mail_id",enableFiltering: true,displayName:"Email",width:300,cellToolTip:true,visible:false},
-                    { field: "status",enableFiltering: true,displayName:"Status",width:200,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span ng-if="row.entity.status==1">Active</span><span ng-if="row.entity.status==0">Deactive</span></div>'},
-                    { field: "gender",enableFiltering: true,displayName:"Gender",width:200,visible:false,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span ng-if="row.entity.gender==1">Male</span><span ng-if="row.entity.gender==2">Female</span><span ng-if="row.entity.gender==3">Other</span></div>'},
-                    { field: "location",enableFiltering: true,displayName:"Location",width:300,cellToolTip:true,visible:false},
+                    { field: "status",enableFiltering: true,displayName:"Status",width:150,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span ng-if="row.entity.status==1">Active</span><span ng-if="row.entity.status==3">Deactive</span></div>'},
+                    { field: "role",enableFiltering: true,displayName:"Role",width:150,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span ng-if="row.entity.role==1">Admin</span><span ng-if="row.entity.role==2">Customer</span><span ng-if="row.entity.role==3">Merchant</span></div>'},
+                    { field: "pub_name",enableFiltering: true,displayName:"Pub name",width:150,cellToolTip:true,},
                     ]
     };
 
@@ -262,67 +217,17 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
     	console.log(userdata);
     	$scope.newuser.id = userdata.id;
 	    $scope.newuser.email = userdata.email;
-	    $scope.newuser.phoneno = parseInt(userdata.phone_no);
-	    $scope.newuser.role = userdata.rolename;
-	    $scope.newuser.status = userdata.status;
+	    $scope.newuser.mobile_no = parseInt(userdata.mobile_no);
+	    $scope.newuser.role = userdata.role;
+	    $scope.newuser.status = userdata.status.toString();
 	    $scope.newuser.name = userdata.name;
-	    $scope.newuser.last_name = userdata.last_name;
-	    $scope.newuser.branch_name = userdata.branch_name;
+	    $scope.newuser.pub_name = userdata.pub_name;
+	    if(userdata.pincode)
+	    $scope.newuser.pincode = userdata.pincode;
     }
 
 	$scope.adduser = function()
   	{
-
-	    /*if($scope.newuser.role == undefined || $scope.newuser.role == null || $scope.newuser.role  == '')
-	    {
-	        $scope.notifymessage("Select Role",'failure');
-	        return;
-	    }
-	    if($scope.newuser.first_name == undefined || $scope.newuser.first_name == null || $scope.newuser.first_name  == '')
-	    {
-	        $scope.notifymessage("Enter First Name",'failure');
-	        return;
-	    }
-	    else
-	    {
-	        if($scope.newuser.first_name.length > 20)
-	        {
-	             $scope.notifymessage("First Name Should Not Be Greater Than 20",'failure');
-	              return;
-	        }
-	    }
-	    if($scope.newuser.last_name == undefined || $scope.newuser.last_name == null || $scope.newuser.last_name  == '')
-	    {
-	        $scope.notifymessage("Enter Last Name",'failure');
-	        return;
-	    }
-	    else
-	    {
-	        if($scope.newuser.last_name.length > 20)
-	          {
-	               $scope.notifymessage("Last Name Should Not Be Greater Than 20",'failure');
-	                return;
-	          }
-	    }
-	    if($scope.newuser.email == undefined || $scope.newuser.email == null || $scope.newuser.email  == '')
-	    {
-	        $scope.notifymessage("Enter Valid Email",'failure');
-	        return;
-	    }
-	    
-	    if($scope.newuser.phoneno == undefined || $scope.newuser.phoneno == null || $scope.newuser.phoneno  == '')
-	    {
-	        $scope.notifymessage("Enter Mobile Number",'failure');
-	        return;
-	    }
-	    else
-	    {
-	        if($scope.newuser.phoneno.toString().length != 10)
-	        {
-	           $scope.notifymessage("Mobile Number Should Be 10 Digits",'failure');
-	            return;
-	        }
-	    }*/
 	   
 	    console.log($scope.newuser);
 	      $http({ 
@@ -349,8 +254,43 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
       });
 	 }
 
+	 $scope.changeuserstatus = function(row,status)
+    {      
+      $http({
+        method: 'POST',
+        url: 'api/changeuserstatus',
+        data: {
+          'user' : row,
+          'status' : status,
+        }
+      }).then(function(success){
+        if(success.data.status == 'success')
+        {
+          if(status == 'remove')
+          {            
+            sweetAlert("Success", "Coachee Removed Successfully", "success");
+            $scope.getCoachee();
+            return;
+          }
+          notify({
+            message: success.data.reason,
+            classes: 'alert-success',
+            duration: 2000
+          });
+          $scope.getallusers();
+        }
+      },function(error){
+
+      });
+    }
+
+    $scope.showlistscrren = function()
+	{
+	  $scope.newusershow = false;
+	}
+
 	 $scope.notifymessage = function(message,type)
-{
+	{
    notify.closeAll();
     if(type == 'success')
     {

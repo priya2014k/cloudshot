@@ -40,6 +40,16 @@ class User extends Authenticatable
             ]);
     }
 
+    public function adminsignupValidator($signupData)
+    {
+        return Validator::make($signupData, [
+            'name' => 'required',
+            'email' => 'required',
+            'role' => 'role',    
+            'mobile_no' => 'required',
+            'password'  =>'password',
+            ]);
+    }
     /*create user*/
     public function createUser($userData)
     {
@@ -64,7 +74,11 @@ class User extends Authenticatable
     public function createUserByAdmin($userData)
     {
         Log::debug("Enter Function ".__CLASS__." ".__FUNCTION__);
-        $user = new User();
+        if($userData->id){
+            $user =  User::where('email', $userData['email'])->first();
+        }else{
+            $user = new User();
+        }
         if(isset($userData->email)){
             $user->email = $userData->email;
         }

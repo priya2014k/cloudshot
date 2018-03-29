@@ -16,81 +16,11 @@
 				   <div class="clearfix"> </div>
 <!--heder end here-->
 	<div class="validation-form" ng-if="!newusershow">
- 	
-        <form>
-         	<div class="vali-form row">
-         	<div class="col-md-3 form-group2 group-mail">
-           <!--  <label class="label-color">Search By Role</label> -->
-            <select ng-model="search.role" ng-change="getusersbysearch()">
-            	<option value="">Search By Role</option>
-            	<option ng-repeat="role in roleslist"  value="{$role.id$}">{$role.name$}</option>
-            	
-            </select>
-            </div>
-            <div class="col-md-3 form-group1 group-mail">
-            <!--   <label class="label-color">Email</label> -->
-              <input type="email" placeholder="Search By Email" ng-model="search.email" ng-blur="getusersbysearch()" >
-            </div>
-            <div class="col-md-3 form-group1 group-mail">
-              <!-- <label class="label-color">Phone Number</label>  -->
-              <input type="number" placeholder="Search By Phone Number"  ng-model="search.phoneno" ng-blur="getusersbysearch()" >
-            </div>
-             <div class="col-md-3 form-group margin-top">
-
-             <button type="button" ng-click="getusersbysearch()" class="btn btn-default searchbutton">Go</button>
-
-             <!-- <button type="reset" ng-click="reset()" class="btn btn-default searchbutton">Reset</button> -->
-             <span  ng-click="reset()" data-toggle="tooltip" data-placement="right" title="refresh" id="refresh" style="cursor: pointer;padding: 12px;"><i class="fa fa-refresh" aria-hidden="true" style="padding-top: 45px;"></i></span>
-                            
-             <button type="button" ng-click="addUser()" class="btn btn-primary searchbutton">Add User</button>
-            </div>
-             
-            <div class="clearfix"> </div>
-            </div>
-        </form>
-    <!----> 
-    <div class="grid"  ui.grid.autoScroll ui-grid-resize-columns ui-grid-auto-resize ui-grid-selection ui-grid-pagination ui-grid="gridOptionsActive" style="min-height:540px;border:none;padding-top: 10px;">
-        <div class="watermark" ng-show="!myData.length">No data available</div>
+    <h4>User Management</h4>
+        <div class="grid"  ui.grid.autoScroll ui-grid-resize-columns ui-grid-auto-resize ui-grid-selection ui-grid-pagination ui-grid="gridOptionsActive" style="min-height:540px;border:none;padding-top: 10px;">
+            <div class="watermark" ng-show="!myData.length">No data available</div>
+        </div>
     </div>
- 
-<div class="inbox-mail">
-	
-	<div ng-if="!newusershow">
-	<div class="w3l-table-info">
-					 
-					    <table id="table">
-						<thead>
-						  <tr>
-							<th>Name</th>
-							<th>Role</th>
-							<th>Email</th>
-							<th>Phone No</th>
-							<th>Branch</th>
-							<th>Actions</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr ng-repeat="user in userlist track by $index">
-							<td>{$user.name$} {$user.last_name$} </td>
-							<td>{$user.rolename$}</td>
-							<td>{$user.email$}</td>
-							<td>{$user.mobile_no$}</td>
-							<td><span ng-if="user.role=='3'||user.role=='2'">{$user.branch.branch_name$}</span></td>
-							<td><i class="fa fa-pencil" ng-click="edituser(user)" aria-hidden="true"></i></td>
-						  </tr>
-						  
-						</tbody>
-					  </table>
-					</div>
-
-		<div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 pagin vali-form">
-			<div class="short_pul pull-right" ng-if="!mailread" ng-cloak ng-show="total=='true'">
-			{$begin$} - {$end$} of {$totallength$} <a href="javascript:void(0)"><i class="fa fa-fast-backward i-arrow" ng-click="previouspage()" ng-show="previousdisable=='true'"></i></a>  <a href="javascript:void(0)"><i class="fa fa-fast-forward i-arrow" ng-click="nextpage()" ng-show="nextdisable=='true'"></i></a>
-			</div>
-	</div>
-</div>
-</div>
-</div>
 	<div class="validation-form" ng-if="newusershow">
  	<!---->
   	    
@@ -142,7 +72,7 @@
             </select> -->
             <select ng-model="newuser.status">
             	<option value="1">Active</option>
-            	<option value="2">Deactivate</option>
+            	<option value="3">Deactivate</option>
             </select>
             </div>
              <div class="clearfix"> </div>
@@ -151,7 +81,7 @@
               <button type="reset" ng-click="showlistscrren()" class="btn btn-default">Cancel</button>
             </div>
             <div class="col-md-12 form-group" ng-if="edittrue">
-              <button type="submit" ng-click="updateuser()" class="btn btn-primary">Update</button>
+              <button type="submit" ng-click="adduser()" class="btn btn-primary">Update</button>
               <button type="reset" ng-click="showlistscrren()" class="btn btn-default">Cancel</button>
             </div>
           <div class="clearfix"> </div>
