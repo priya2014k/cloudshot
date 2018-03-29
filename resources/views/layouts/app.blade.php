@@ -14,7 +14,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- <link rel="icon" type="image/ico" href="{{ asset('images/dukan_logo.png') }}"/> -->
-   
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.css') }}">
     
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -35,11 +35,13 @@
     
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/angular/angular.min.js') }}" /></script>
-    <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.css') }}" /></script>
+    <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.min.js') }}" /></script>
     <script src="{{ asset('js/ui-load.js') }}"></script>
     <script src="{{ asset('js/ui-jq.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/admin/login.js') }}"></script>
      @yield('content')
    
     

@@ -12,7 +12,7 @@
         <div class="main-wthree">
 			<div class="container">
 			<div class="sin-w3-agile">
-				<h2>Dukan</h2>
+				<h2>CloudShot</h2>
 				<form>
 					<div class="username">
 						<span class="username">Username:</span>

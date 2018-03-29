@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['api']], function () {
     Route::post('login', 'UserController@login');
+    Route::post('userlogin', 'UserController@userlogin');
     Route::post('register', 'UserController@registration');
     Route::post('resend', 'UserController@resendotp');
     Route::post('verifyotp', 'UserController@verifyotp');

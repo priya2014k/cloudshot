@@ -40,6 +40,25 @@ class UserController extends Controller
         return response()->json($response);
     }
 
+    public function userlogin(Request $request){
+        /*$response = (Object)[];
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $user =  User::where('email', $email)->where('password',$password)->first();
+        if($user){
+            return response()->json([
+                'response' => 'success',
+             ]);
+        }else{
+            return response()->json([
+                'response' => 'failure',
+             ]);
+        }*/
+        return response()->json([
+                'response' => 'success',
+             ]);
+    }
+
     public function getAuthUser(Request $request){
         return response()->json([
             'response' => 'success',
