@@ -39,11 +39,12 @@
     <script src="{{ asset('bower_components/angular/angular.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}" /></script>
-    <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.min.js') }}" /></script>
+     <script src="{{ asset('js/angular/app.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.js') }}" /></script>
     <script src="{{ asset('bower_components/ng-grid/build/ng-grid.js') }}"></script>
     <script src="{{ asset('js/ui-load.js') }}"></script>
     <script src="{{ asset('js/ui-jq.js') }}"></script>
-    <script src="{{ asset('js/angular/app.js') }}"></script>
+   
     <script src="{{ asset('js/angular/admin/login.js') }}"></script>
      @yield('content')
    

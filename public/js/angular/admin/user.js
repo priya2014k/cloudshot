@@ -141,9 +141,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
         ],
         primaryKey:'uid',
         fastWatch: true,
-        columnDefs: [//{ field: "entity_name",enableFiltering: true,displayName:"Name",cellToolTip:'Some Text',width:200,visible:true,cellToolTip:true},
-                    //{ field: "name",enableFiltering: true,displayName:"Name",width:200,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()">{$ row.entity.first_name+" "+row.entity.last_name$}</div>'},
-                    { field: "name",enableFiltering: true,displayName:"Name",width:200,},
+        columnDefs: [{ field: "name",enableFiltering: true,displayName:"Name",width:200,},
                     { field: "email",enableFiltering: true,displayName:"Email",width:200,},
                     { field: "mobile_no",enableFiltering: true,displayName:"Phone",width:200},
                     { field: "status",enableFiltering: true,displayName:"Status",width:150,cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span ng-if="row.entity.status==1">Active</span><span ng-if="row.entity.status==3">Deactive</span></div>'},
@@ -266,12 +264,7 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
       }).then(function(success){
         if(success.data.status == 'success')
         {
-          if(status == 'remove')
-          {            
-            sweetAlert("Success", "Coachee Removed Successfully", "success");
-            $scope.getCoachee();
-            return;
-          }
+          
           notify({
             message: success.data.reason,
             classes: 'alert-success',

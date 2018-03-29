@@ -166,7 +166,7 @@ angular.module('cgNotify').run(['$templateCache', function($templateCache) {
     "    ng-style=\"{'margin-left': $centerMargin}\">\n" +
     "\n" +
     "    <div ng-show=\"!$messageTemplate\">\n" +
-    "        {{$message}}\n" +
+    "        {$ $message $}\n" +
     "    </div>\n" +
     "\n" +
     "    <div ng-show=\"$messageTemplate\" class=\"cg-notify-message-template\">\n" +

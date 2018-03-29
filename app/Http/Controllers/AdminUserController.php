@@ -50,7 +50,7 @@ class AdminUserController extends Controller
         $user = $request->all();
         Log::debug("Enter Function ".__CLASS__." ".__FUNCTION__);
         $response = (Object)[];
-        if($user['role'] == 3){
+       /* if($user['role'] == 3){
             $signupValidator = $this->merchant->adminsignupValidator($request->all());
             if ($signupValidator->fails()) {
                 $messages = $signupValidator->errors();
@@ -66,7 +66,7 @@ class AdminUserController extends Controller
                 $response->message = $messages;
                 return response()->json($response);
             }
-        }
+        }*/
         if(array_key_exists('id', $user)){
             if($user['role'] == 3){
                 $merchant = $this->merchant->createMerchant($request);

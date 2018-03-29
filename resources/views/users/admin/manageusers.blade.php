@@ -17,6 +17,7 @@
 <!--heder end here-->
 	<div class="validation-form" ng-if="!newusershow">
     <h4>User Management</h4>
+        <button type="button" ng-click="addUser()" class="btn btn-primary searchbutton pull-right">Add User</button>
         <div class="grid"  ui.grid.autoScroll ui-grid-resize-columns ui-grid-auto-resize ui-grid-selection ui-grid-pagination ui-grid="gridOptionsActive" style="min-height:540px;border:none;padding-top: 10px;">
             <div class="watermark" ng-show="!myData.length">No data available</div>
         </div>
@@ -42,9 +43,13 @@
             <div class="clearfix"> </div>
             </div>
             
-            <div class="col-md-6 form-group1 group-mail">
+            <div class="col-md-6 form-group1 group-mail" ng-if="!edittrue">
               <label class="control-label">Email</label>
               <input type="email" placeholder="Email" ng-model="newuser.email" >
+            </div>
+            <div class="col-md-6 form-group1 group-mail" ng-if="edittrue">
+              <label class="control-label">Email</label>
+              <input type="email" placeholder="Email" ng-model="newuser.email" disabled>
             </div>
             <div class="col-md-6 form-group1 group-mail" ng-if="!edittrue">
               <label class="control-label">Password</label>
