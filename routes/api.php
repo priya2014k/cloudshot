@@ -25,6 +25,8 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('resend', 'UserController@resendotp');
     Route::post('verifyotp', 'UserController@verifyotp');
     
+    Route::get('getroles', 'AdminUserController@getroles');
+    Route::get('getallusers', 'AdminUserController@getallusers');
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('user', 'UserController@getAuthUser');
     });

@@ -16,9 +16,11 @@
     <!-- <link rel="icon" type="image/ico" href="{{ asset('images/dukan_logo.png') }}"/> -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery-ui.css') }}">
-    
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-    
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/google-font.css') }}">
+     
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/icon-font.min.css') }}">
     
     
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/angular/angular-csp.css') }}" />
@@ -27,7 +29,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/angular-notify/dist/angular-notify.css') }}" />
-    
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/ng-grid/ng-grid.css') }}">
     
     @yield('head')
 </head>
@@ -38,6 +40,7 @@
     <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}" /></script>
     <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.min.js') }}" /></script>
+    <script src="{{ asset('bower_components/ng-grid/build/ng-grid.js') }}"></script>
     <script src="{{ asset('js/ui-load.js') }}"></script>
     <script src="{{ asset('js/ui-jq.js') }}"></script>
     <script src="{{ asset('js/angular/app.js') }}"></script>

@@ -5,6 +5,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\Role;
 use JWTAuth;
 use JWTAuthException;
 use Hash;

@@ -18,3 +18,4 @@ Route::get('/login', function () {
 	    return view('auth.login');
 	})->name('login');
 Route::get('dashboard', function () {return view('users.admin.dashboard');})->name('admin.dashboard');
+Route::get('manageusers', function () {return view('users.admin.manageusers');})->name('admin.manageusers');
