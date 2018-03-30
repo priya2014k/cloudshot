@@ -235,16 +235,17 @@ app.controller('UserController', ['$scope','$http','notify','uiGridConstants',
 	          }).then(function(data){
 	            console.log(data);
 	            $("#loadercontainer").hide();
-	            if(data.status == 'Success')
+	            if(data.data.status == 'success')
 	            {
-
+                    $scope.newusershow = false;
 	                  $scope.newuser = {};
-	                  $scope.notifymessage(data.message,'success')
+	                  $scope.notifymessage(data.data.message,'success');
+
 	                  $scope.getallusers();
 	            }
 	            else
 	            {
-	                 $scope.notifymessage(data.message,'failure')
+	                 $scope.notifymessage(data.data.message,'failure')
 	            } 
 	    
 	    },function (error){

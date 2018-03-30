@@ -70,6 +70,7 @@ class AdminUserController extends Controller
         if(array_key_exists('id', $user)){
             if($user['role'] == 3){
                 $merchant = $this->merchant->createMerchant($request);
+                
             }else{
                 $user = $this->user->createUserByAdmin($request);
             }
@@ -99,8 +100,9 @@ class AdminUserController extends Controller
            
             
             Log::debug("Exit Function ".__CLASS__." ".__FUNCTION__);   
-            return response()->json($response);
+            
         }
+        return response()->json($response);
     }
     
     public function changeuserstatus(Request $request){
