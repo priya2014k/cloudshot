@@ -29,6 +29,14 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('getallusers', 'AdminUserController@getallusers');
     Route::post('adduser', 'AdminUserController@adduser');
     Route::post('changeuserstatus', 'AdminUserController@changeuserstatus');
+
+    //category
+    Route::post('/getallcategory/', 'CategoryController@getallcategory');
+    Route::post('addcategory/', 'CategoryController@addcategory');
+    Route::post('/addsubcategory/', 'CategoryController@addsubcategory');
+    Route::post('/getallsubcategory/', 'CategoryController@getallsubcategory');
+    Route::post('categorypic/', 'CategoryController@categorypic');
+
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('user', 'UserController@getAuthUser');
     });

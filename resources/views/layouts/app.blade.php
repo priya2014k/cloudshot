@@ -30,7 +30,8 @@
     
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/angular-notify/dist/angular-notify.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/ng-grid/ng-grid.css') }}">
-    
+     <link rel="stylesheet" type="text/css" href="{{ asset('css/table-style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/basictable.css') }}" />
     @yield('head')
 </head>
 <body id="dashboards-analytics" data-layout="top-navigation-2" data-sidebar="primary" data-navbar="primary" data-controller="dashboards" data-view="analytics" >
@@ -41,10 +42,11 @@
     <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}" /></script>
      <script src="{{ asset('js/angular/app.js') }}"></script>
     <script src="{{ asset('bower_components/angular-notify/dist/angular-notify.js') }}" /></script>
+    <script src="{{ asset('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
     <script src="{{ asset('bower_components/ng-grid/build/ng-grid.js') }}"></script>
     <script src="{{ asset('js/ui-load.js') }}"></script>
     <script src="{{ asset('js/ui-jq.js') }}"></script>
-   
+   <script src="{{ asset('js/angular/ng-table.min.js') }}"></script>
     <script src="{{ asset('js/angular/admin/login.js') }}"></script>
      @yield('content')
    

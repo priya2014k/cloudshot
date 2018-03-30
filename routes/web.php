@@ -19,3 +19,12 @@ Route::get('/login', function () {
 	})->name('login');
 Route::get('dashboard', function () {return view('users.admin.dashboard');})->name('admin.dashboard');
 Route::get('manageusers', function () {return view('users.admin.manageusers');})->name('admin.manageusers');
+
+//category management
+	Route::get('/managecategory', function () {
+	    return view('users.admin.managecategory');
+	})->name('managecategory');
+
+	Route::get('/managecategorysubcategory', function () {
+	    return view('users.admin.managecategorysubcategory');
+	})->name('managecategorysubcategory');

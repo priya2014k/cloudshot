@@ -1,7 +1,7 @@
 'use strict';
 
 
-var app = angular.module('app',['cgNotify','ngGrid','ui.grid','ui.load',
+var app = angular.module('app',['cgNotify','ui.bootstrap','ngFileUpload','ngGrid','ui.grid','ui.load',
     'ui.jq','ui.grid.autoResize', 'ui.grid.selection', 
     'ui.grid.pagination','ui.grid.resizeColumns']);
 
