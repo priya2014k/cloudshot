@@ -25,6 +25,6 @@ Route::get('manageusers', function () {return view('users.admin.manageusers');})
 	    return view('users.admin.managecategory');
 	})->name('managecategory');
 
-	Route::get('/managecategorysubcategory', function () {
-	    return view('users.admin.managecategorysubcategory');
-	})->name('managecategorysubcategory');
+	Route::get('/categorypermission', function () {
+	    return view('users.admin.categorypermission');
+	})->name('categorypermission');

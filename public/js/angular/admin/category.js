@@ -49,6 +49,41 @@ app.controller('CategoryController', ['$scope','$http','notify','uiGridConstants
 	    });
 	}
 
+	$scope.getcategory = function()
+	{
+		$scope.newusershow = false;
+	    $http({ 
+	          method: 'get', 
+	          url: 'api/getcategory',
+	         }).then(function(data, status, headers, config){
+	            console.log(data);
+	            if(data.data.status == 'success')
+	            {
+	                $scope.category_list = data.data;
+	            }
+	           
+	    },function(error){
+
+	    });	}
+
+	$scope.getsubcategory = function()
+	{
+		$scope.newpershow = false;
+		$http({ 
+	          method: 'get', 
+	          url: 'api/getsubcategory',
+	         }).then(function(data, status, headers, config){
+	            console.log(data);
+	            if(data.status == 'success')
+	            {
+	                $scope.subcategory_list = data.data.data;
+	            }
+	    },function(error){
+
+	    });
+	}
+
+
   	$scope.addnewcategory = function()
 	{
 	    $scope.newusershow = true;
@@ -84,7 +119,7 @@ app.controller('CategoryController', ['$scope','$http','notify','uiGridConstants
 	    $scope.newsubcategory = {};
 	    $scope.newsubcategory.id = subcategory.id;
 	    $scope.newsubcategory.name = subcategory.name;
-	    $scope.newsubcategory.status = subcategory.status
+	    $scope.newsubcategory.status = subcategory.status.toString();
 	}
 
 	$scope.showlistscrren = function()

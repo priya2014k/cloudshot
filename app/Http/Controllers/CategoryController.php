@@ -27,6 +27,24 @@ class CategoryController extends Controller
         $this->subcategory = new SubCategory;
     }
 
+    //getcategory
+    public function getcategory(Request $request){
+    	$response = (Object)[];
+    	$result = Category::where('status',1)->orderBy('updated_at', 'DESC')->get();
+    	$response->status = "success";
+    	$response->data = $result;
+        return response()->json($response);
+    } 
+
+    //getsubcategory
+    public function getsubcategory(Request $request){
+    	$response = (Object)[];
+    	$result = SubCategory::where('status',1)->orderBy('updated_at', 'DESC')->get();
+    	$response->status = "success";
+    	$response->data = $result;
+        return response()->json($response);
+    } 
+
     //getallcategory
     public function getallcategory(Request $request){
     	$response = (Object)[];

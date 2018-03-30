@@ -31,6 +31,8 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('changeuserstatus', 'AdminUserController@changeuserstatus');
 
     //category
+    Route::get('getcategory/', 'CategoryController@getcategory');
+    Route::get('getsubcategory/', 'CategoryController@getsubcategory');
     Route::post('/getallcategory/', 'CategoryController@getallcategory');
     Route::post('addcategory/', 'CategoryController@addcategory');
     Route::post('/addsubcategory/', 'CategoryController@addsubcategory');

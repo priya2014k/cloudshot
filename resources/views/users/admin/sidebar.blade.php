@@ -28,7 +28,7 @@
 										<li id="menu-academico" ><a href="#"><i class="fa fa-cubes" aria-hidden="true"></i><span> Categories</span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 										   <ul id="menu-academico-sub" class="collapse_content" >
 										   <li id="menu-academico-avaliacoes" ><a href="managecategory">Category & SubCategory</a></li>
-											<li id="menu-academico-avaliacoes" ><a href="managecategorysubcategory">Category Based Permissions</a></li>
+											<li id="menu-academico-avaliacoes" ><a href="categorypermission">Category Based Permissions</a></li>
 										  </ul>
 										</li>
                                         <li><a href="manageproduct"><i class="fa fa-shopping-basket"></i>  <span>Product Management</span><div class="clearfix"></div></a></li>
