@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\SubCategory;
 use App\Models\Category;
+use App\Models\CategorySubCategoryTransaction;
 use JWTAuth;
 use JWTAuthException;
 use Hash;
@@ -25,7 +26,8 @@ class CategoryController extends Controller
         $this->user = new User;
         $this->category = new Category;
         $this->subcategory = new SubCategory;
-    }
+		$this->cattransaction = new CategorySubCategoryTransaction;
+	}
 
     //getcategory
     public function getcategory(Request $request){
@@ -61,6 +63,25 @@ class CategoryController extends Controller
     	$response->data = $result;
         return response()->json($response);
     }
+
+    //get modules by role id
+    public function getsubcategoriesbycatid(Request $request)
+    {
+        $response = (Object)[];
+       try{
+            $category =  $request->all();
+           	$result = CategorySubCategoryTransaction::with('SubCategory')->where('category_id',$category['category_id'])->where('status','1')->get();
+            $response->status = 'success'; 
+            $response->data = $result;
+       }
+       catch(Exception $e)
+       {
+            $response->status = 'Failure';   
+       }
+
+       return response()->json($response);
+    }
+
 
 	public function addcategory(Request $request)
     {
@@ -359,6 +380,45 @@ class CategoryController extends Controller
         {
             return "filenot found";
         }
+    }
+
+    public function categorysubcategorytransaction(Request $request)
+    {
+        $response = (Object)[];
+        $categorydetails =  $request->all();
+        try
+        {
+            
+               CategorySubCategoryTransaction::where('category_id',$categorydetails['category_id'])->delete();           
+               $userrole                      = $categorydetails['subcategories'];//array
+                 foreach ($userrole as $roleper) {
+                    $UT = new CategorySubCategoryTransaction;
+                    $UT->created_by    =     Auth::id();
+                    $UT->category_id       = $categorydetails['category_id'];
+                    $UT->status = "1";
+                    if($roleper == null)
+                    {
+                        
+                    }
+                    else
+                    {
+                        $UT->sub_category_id = $roleper;
+                        $UT->save();
+                    }
+                    
+                    
+                }
+
+                $response->status = 'Success';
+                $response->reason = "Sub Categories Added Succesfully";  
+          
+        }
+        catch(Exception $e)
+        {
+            $response->status = 'Failure';
+            $response->reason = "Something Went Wrong,Please try Again";  
+        }
+        return response()->json($response);
     }
 
 }

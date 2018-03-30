@@ -39,6 +39,9 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/getallsubcategory/', 'CategoryController@getallsubcategory');
     Route::post('categorypic/', 'CategoryController@categorypic');
 
+    //trans
+    Route::post('/categorysubcategory/', 'CategoryController@categorysubcategorytransaction');
+
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('user', 'UserController@getAuthUser');
     });

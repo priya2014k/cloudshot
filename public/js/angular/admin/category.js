@@ -59,7 +59,7 @@ app.controller('CategoryController', ['$scope','$http','notify','uiGridConstants
 	            console.log(data);
 	            if(data.data.status == 'success')
 	            {
-	                $scope.category_list = data.data;
+	                $scope.category_list = data.data.data;
 	            }
 	           
 	    },function(error){
@@ -74,7 +74,7 @@ app.controller('CategoryController', ['$scope','$http','notify','uiGridConstants
 	          url: 'api/getsubcategory',
 	         }).then(function(data, status, headers, config){
 	            console.log(data);
-	            if(data.status == 'success')
+	            if(data.data.status == 'success')
 	            {
 	                $scope.subcategory_list = data.data.data;
 	            }
@@ -308,6 +308,52 @@ app.controller('CategoryController', ['$scope','$http','notify','uiGridConstants
 		   },function(error){
 
 		   })
+	}
+
+	$scope.categorySubcategory = function()
+	{
+
+	    if($scope.categorys.category_id == undefined || $scope.categorys.category_id == null || $scope.categorys.category_id == '')
+	    {
+	        $scope.notifymessage("Select Category","failure");
+	        return;
+	    }
+	    $scope.categorys.subcategories = [];
+	    for(var i = 0;i<$scope.subcategorylist.length;i++)
+	    {
+	        
+	        if($scope.subcategorylist[i].checked)
+	        {
+	            $scope.categorys.subcategories.push($scope.subcategorylist[i].id);
+	        }
+	    }
+
+	    if($scope.categorys.subcategories.length == 0)
+	    {
+	        $scope.notifymessage("Select Sub Categories","failure");
+	        return;
+	    }
+
+	    $http({ 
+	          method: 'POST', 
+	          url: 'api/categorysubcategory',
+	          data:$scope.categorys,
+	          //headers : { 'Authorization' : 'Bearer '+window.localStorage['token'] }
+	         }).success(function(data, status, headers, config){
+	            if(data.status == 'Success')
+	            {
+	                $scope.notifymessage(data.reason,'success')
+	                //$scope.getsubcategorybyid()
+	                
+	                
+	            }
+	            else
+	            {
+	                 $scope.notifymessage(data.reason,'failure')
+	                
+	            }
+	           
+	    });
 	}
 
 	$scope.notifymessage = function(message,type)
